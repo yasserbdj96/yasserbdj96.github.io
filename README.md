@@ -3,7 +3,7 @@
   <br><br>
 </div>
 
-[![CodeQL](https://github.com/yasserbdj96/yasserbdj96.github.io/actions/workflows/codeql-analysis.yml/badge.svg)]
+![CodeQL](https://github.com/yasserbdj96/yasserbdj96.github.io/actions/workflows/codeql-analysis.yml/badge.svg)
 [![Deploy static content to Pages](https://github.com/yasserbdj96/yasserbdj96.github.io/actions/workflows/pages.yml/badge.svg)](https://github.com/yasserbdj96/yasserbdj96.github.io/actions/workflows/pages.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/yasserbdj96/yasserbdj96.github.io/badge)](https://www.codefactor.io/repository/github/yasserbdj96/yasserbdj96.github.io)
 [![Visitors](https://visitor-badge.laobi.icu/badge?page_id=yasserbdj96.yasserbdj96.github.io&format=true)](https://github.com/yasserbdj96/yasserbdj96.github.io)
