@@ -14,7 +14,6 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/yasserbdj96/yasserbdj96.github.io)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/yasserbdj96/yasserbdj96.github.io)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/yasserbdj96/yasserbdj96.github.io)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/yasserbdj96/yasserbdj96.github.io)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/yasserbdj96/yasserbdj96.github.io)
 ![GitHub last commit](https://img.shields.io/github/last-commit/yasserbdj96/yasserbdj96.github.io)
 [![GitHub license](https://img.shields.io/github/license/yasserbdj96/yasserbdj96.github.io)](https://github.com/yasserbdj96/yasserbdj96.github.io)
