@@ -1,1 +1,9 @@
-44
+# Basic set up for three package managers
+
+version: 2
+updates:
+  # Maintain dependencies for GitHub Pages
+  - package-ecosystem: "github-pages"
+    directory: "/"
+    schedule:
+      interval: "daily"
