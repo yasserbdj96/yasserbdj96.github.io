@@ -20,7 +20,7 @@ function read_json(){
                 //links
                 links(res);
                 
-            };
+            }
         }
     };
     xhr.open('GET', "./src/json/data.json", true);
