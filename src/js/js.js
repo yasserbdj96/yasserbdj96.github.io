@@ -4,7 +4,8 @@ function links(res){
     for (let i = 0; i < res["links"].length; i++) {
         var icon=res["links"][i]["icon"];
         var url=res["links"][i]["url"];
-        links_html+='<a class="transform hover:-translate-y-1 active:translate-y-1" href="'+url+'"><img src="'+icon+'"></a>';
+        var alt=res["links"][i]["alt"];
+        links_html+='<a class="transform hover:-translate-y-1 active:translate-y-1" href="'+url+'"><img style="width:100%;" src="'+icon+'" alt="'+alt+'"></a>';
     }
      document.getElementById("links").innerHTML=links_html;
 }
@@ -19,7 +20,6 @@ function read_json(){
                 
                 //links
                 links(res);
-                
             }
         }
     };
