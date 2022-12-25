@@ -1,6 +1,7 @@
 {
     "links": [
         {"icon":"./src/svg/github.svg","url" : "https://github.com/yasserbdj96","alt":"yasserbdj96 on github"},
+        {"icon":"./src/svg/gitlab.svg","url" : "https://gitlab.com/yasserbdj96","alt":"yasserbdj96 on gitlab"},
         {"icon":"./src/svg/twitter.svg","url" : "https://twitter.com/yasserbdj96","alt":"yasserbdj96 on twitter"},
         {"icon":"./src/svg/facebook.svg","url" : "https://facebook.com/yasserbdj96","alt":"yasserbdj96 on facebook"},
         {"icon":"./src/svg/gmail.svg","url" : "mailto:yasser.bdj96@gmail.com","alt":"yasserbdj96 mail"},
