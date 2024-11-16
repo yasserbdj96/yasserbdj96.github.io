@@ -52,7 +52,8 @@ img,object,svg{display:block}
 .border-2{border-width:2px}
 .border-white{--tw-border-opacity:1;border-color:rgba(255,255,255,var(--tw-border-opacity))}
 .bg-red-300{--tw-bg-opacity:1;background-color:rgba(252,165,165,var(--tw-bg-opacity))}
-.bg-green-600{--tw-bg-opacity:1;background-color:rgba(5,150,105,var(--tw-bg-opacity))}
+.bg-green-600{--tw-bg-opacity:1;background-color:rgba(255,0,0,var(--tw-bg-opacity))}
+/*.bg-green-600{--tw-bg-opacity:1;background-color:rgba(5,150,105,var(--tw-bg-opacity))}*/
 .bg-paper{--tw-bg-opacity:1;background-color:rgba(245,245,245,var(--tw-bg-opacity))}
 .fill-current{fill:currentColor}
 .stroke-current{stroke:currentColor}
