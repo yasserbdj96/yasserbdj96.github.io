@@ -18,7 +18,7 @@
     </header>
 
     <section class="container post-content">
-        <img src="./img/blog-post1.jpg" alt="Featured Image" class="featured-image">
+        <img src="" alt="Featured Image" class="featured-image">
         
         <article>
             <h3>Introduction</h3>
@@ -28,24 +28,23 @@
         <!--a href="blog.html" class="btn">Back to Blog</a-->
     </section>
 
+    <script src="./static/app.js"></script>
     <script>
-        fetch('https://yasserbdj96.pythonanywhere.com/data.json')
-            .then(response => response.json())
-            .then(data => {
-                const urlParams = new URLSearchParams(window.location.search);
-                const postId = urlParams.get('id');
-                const post = data.blogPosts[postId];
+        (async function() {
+            const data = await loadDataOnce();
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+            const post = data.blogPosts[postId];
 
-                if (post) {
-                    document.querySelector('header h2').textContent = post.title;
-                    document.querySelector('header p').textContent = post.excerpt;
-                    document.querySelector('.post-meta').innerHTML = 
-                        `Posted on ${post.date} • ${post.readTime}`;
-                    document.querySelector('.featured-image').src = post.cover;
-                    document.querySelector('article').innerHTML = post.content;
-                }
-            })
-            .catch(error => console.error('Error loading blog post:', error));
+            if (post) {
+                document.querySelector('header h2').textContent = post.title;
+                document.querySelector('header p').textContent = post.excerpt;
+                document.querySelector('.post-meta').innerHTML = 
+                    `Posted on ${post.date} • ${post.readTime}`;
+                document.querySelector('.featured-image').src = post.cover;
+                document.querySelector('article').innerHTML = post.content;
+            }
+        })().catch(console.error); // ✅ This part was missing
     </script>
     <div id="footer-placeholder"></div>
     <script src="./static/navigation-footer.js"></script>

@@ -26,7 +26,7 @@
         </section>
         <div class="projects-grid"></div>
     </section>
-
+    <script src="./static/app.js"></script>
     <script>
         // Fetch and initialize projects
         document.addEventListener('DOMContentLoaded', () => {
@@ -34,26 +34,11 @@
         });
 
         async function fetchProjects() {
-    try {
-        const response = await fetch('https://yasserbdj96.pythonanywhere.com/data.json');
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const contentType = response.headers.get('content-type');
-            if (!contentType || !contentType.includes('application/json')) {
-                throw new TypeError("Received non-JSON response");
-            }
-            const data = await response.json();
+            const data = await loadDataOnce();
             const projects = data.projects;
             initFilters(projects);
             renderProjects(projects);
-        } catch (error) {
-            console.error('Error loading projects:', error);
-            // Show error message to user
-            console.log('Failed to load projects. Please try again later.');
         }
-    }
-
         function initFilters(projects) {
             const techFilters = document.getElementById('tech-filters');
             const allTech = [...new Set(projects.flatMap(project => project.tech))].sort();

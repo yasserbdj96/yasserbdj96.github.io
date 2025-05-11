@@ -25,31 +25,31 @@
     </main>
 
     <!-- JavaScript -->
-    <script>
-        fetch('https://yasserbdj96.pythonanywhere.com/data.json')
-            .then(response => response.json())
-            .then(data => {
-                const blogGrid = document.querySelector('.blog-grid');
-                data.blogPosts.forEach((post, index) => {
-                    const article = document.createElement('a');
-                    article.className = 'blog-post';
-                    article.href = `post.html?id=${index}`;
-                    article.innerHTML = `
-                        <img src="${post.image}" class="post-thumbnail" alt="${post.title}" />
-                        <div class="post-content">
-                            <div class="post-meta">
-                                <span>${post.date}</span> • <span>${post.category}</span>
-                            </div>
-                            <h3>${post.title}</h3>
-                            <p class="post-excerpt">${post.excerpt}</p>
-                            <div class="post-meta">${post.readTime}</div>
-                        </div>
-                    `;
-                    blogGrid.appendChild(article);
-                });
-            })
-            .catch(error => console.error('Error loading blog posts:', error));
-    </script>
+    <script src="./static/app.js"></script>
+<script>
+    (async function() {
+        const data = await loadDataOnce();
+        const blogGrid = document.querySelector('.blog-grid');
+        data.blogPosts.forEach((post, index) => {
+            const article = document.createElement('a');
+            article.className = 'blog-post';
+            article.href = `post.html?id=${index}`;
+            article.innerHTML = `
+                <img src="${post.image}" class="post-thumbnail" alt="${post.title}" />
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span>${post.date}</span> • <span>${post.category}</span>
+                    </div>
+                    <h3>${post.title}</h3>
+                    <p class="post-excerpt">${post.excerpt}</p>
+                    <div class="post-meta">${post.readTime}</div>
+                </div>
+            `;
+            blogGrid.appendChild(article);
+        });
+    })();
+</script>
+
     <div id="footer-placeholder"></div>
     <script src="./static/navigation-footer.js"></script>
 </body>

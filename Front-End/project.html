@@ -32,33 +32,32 @@
             </div>
         </div>
     </section>
-
+    <script src="./static/app.js"></script>
     <script>
-        fetch('https://yasserbdj96.pythonanywhere.com/data.json')
-            .then(response => response.json())
-            .then(data => {
-                const urlParams = new URLSearchParams(window.location.search);
-                const projectId = urlParams.get('id');
-                const project = data.projects[projectId];
+        (async function() {
+            const data = await loadDataOnce();
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = urlParams.get('id');
+            const project = data.projects[projectId];
 
-                if (project) {
-                    document.querySelector('header h2').textContent = project.title;
-                    document.querySelector('header p').textContent = project.description;
-                    document.querySelector('.project-hero').src = project.cover;
-                    document.querySelector('.project-content p').textContent = project.details;
-                    document.querySelector('.tech-list').innerHTML = project.tech
-                        .map(tech => `<span class="tech-item">${tech}</span>`).join('');
-                }
-                // Update source link
-                const sourceLink = document.querySelector('#source'); // Fixed selector
-                if (project.source) {
-                    sourceLink.href = project.source;
-                } else {
-                    sourceLink.style.display = 'none'; // Hide if no source
-                }
-            })
-            .catch(error => console.error('Error loading project:', error));
+            if (project) {
+                document.querySelector('header h2').textContent = project.title;
+                document.querySelector('header p').textContent = project.description;
+                document.querySelector('.project-hero').src = project.cover;
+                document.querySelector('.project-content p').textContent = project.details;
+                document.querySelector('.tech-list').innerHTML = project.tech
+                    .map(tech => `<span class="tech-item">${tech}</span>`).join('');
+            }
+
+            const sourceLink = document.querySelector('#source');
+            if (project.source) {
+                sourceLink.href = project.source;
+            } else {
+                sourceLink.style.display = 'none';
+            }
+        })().catch(console.error); // 👈 Add the call + error handling
     </script>
+
     <div id="footer-placeholder"></div>
     <script src="./static/navigation-footer.js"></script>
 </body>
