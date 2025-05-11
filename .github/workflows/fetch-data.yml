@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false  # Required for PAT authentication
 
       - name: Fetch new data from remote
         run: |
@@ -21,15 +23,11 @@ jobs:
         id: compare
         run: |
           target_path="Front-End/data.json"
-
           if [ ! -f "$target_path" ]; then
-            echo "No existing file. Will update."
             echo "changed=true" >> "$GITHUB_OUTPUT"
           elif ! cmp -s new_data.json "$target_path"; then
-            echo "Data changed. Will update."
             echo "changed=true" >> "$GITHUB_OUTPUT"
           else
-            echo "Data is the same. Skipping update."
             echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
 
@@ -41,4 +39,4 @@ jobs:
           git config user.email "auto-updater@example.com"
           git add Front-End/data.json
           git commit -m "Update data.json from remote source"
-          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/yasserbdj96/Portfolio.git
+          git push https://yasserbdj96:${{ secrets.GH_PAT }}@github.com/yasserbdj96/Portfolio.git main
