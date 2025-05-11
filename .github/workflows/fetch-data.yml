@@ -1,0 +1,49 @@
+name: Fetch and Update Data
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Every hour
+  workflow_dispatch:      # Allows manual trigger
+
+jobs:
+  fetch_and_update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Fetch new data
+        run: |
+          curl -sSL https://yasserbdj96.pythonanywhere.com/data.json -o new_data.json
+
+      - name: Compare with existing data
+        id: compare
+        run: |
+          target_path="./Front-End/data.json"
+
+          if [ ! -f "$target_path" ]; then
+            echo "No existing data.json. Will proceed to update."
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          elif ! cmp -s new_data.json "$target_path"; then
+            echo "Data changed. Will proceed to update."
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Data is identical. No update needed."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Update data.json and commit
+        if: steps.compare.outputs.changed == 'true'
+        run: |
+          cp new_data.json ./Front-End/data.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ./Front-End/data.json
+          git commit -m "Update data.json from remote source"
+          git push
