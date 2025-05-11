@@ -38,6 +38,7 @@
             const post = data.blogPosts[postId];
 
             if (post) {
+                document.title = post.title;
                 document.querySelector('header h2').textContent = post.title;
                 document.querySelector('header p').textContent = post.excerpt;
                 document.querySelector('.post-meta').innerHTML = 

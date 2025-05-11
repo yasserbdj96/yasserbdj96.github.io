@@ -42,10 +42,24 @@
             const project = data.projects[projectId];
 
             if (project) {
+                document.title = project.title;
                 document.querySelector('header h2').textContent = project.title;
                 document.querySelector('header p').textContent = project.description;
                 document.querySelector('.project-hero').src = project.cover;
-                document.querySelector('.project-content p').textContent = project.details;
+                //document.querySelector('.project-content p').textContent = project.details;
+                // Handle details content
+                const detailsContainer = document.querySelector('.project-content p');
+                if (project.details) {
+                    if (isValidHTML(project.details)) {
+                        detailsContainer.innerHTML = project.details;
+                    } else {
+                        detailsContainer.textContent = project.details;
+                    }
+                } else {
+                    detailsContainer.textContent = "No project details available.";
+                }
+
+
                 document.querySelector('.tech-list').innerHTML = project.tech
                     .map(tech => `<span class="tech-item">${tech}</span>`).join('');
             }
