@@ -41,4 +41,4 @@ jobs:
           git config user.email "auto-updater@example.com"
           git add ./Front-End/data.json
           git commit -m "Update data.json from remote source"
-          git push https://x-access-token:${{ secrets.0x_GH_PAT }}@github.com/${{ github.repository }}.git HEAD:main
+          git push https://x-access-token:${{ secrets.x0_GH_PAT }}@github.com/${{ github.repository }}.git HEAD:main
