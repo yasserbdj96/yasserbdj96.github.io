@@ -1,0 +1,72 @@
+{
+  "projects": [
+    {
+      "title": "Project 1",
+      "description": "A responsive web application built with modern technologies",
+      "tech": ["HTML", "CSS", "JavaScript", "API"],
+      "image": "./static/img/image.png",
+      "cover": "./static/img/image.png",
+      "source": "https://github.com/yasserbdj96",
+      "details": "Detailed project description explaining the purpose, challenges, and solutions implemented."
+    },
+    {
+      "title": "Project 2",
+      "description": "E-commerce platform with payment integration",
+      "tech": ["JavaScript", "Node.js", "python"],
+      "image": "./static/img/image.png",
+      "cover": "./static/img/image.png",
+      "source": "https://github.com/yasserbdj96",
+      "details": "Advanced e-commerce solution with secure payment processing."
+    },
+    {
+      "title": "Project 3",
+      "description": "E-commerce platform with payment integration",
+      "tech": ["JavaScript", "Node.js", "php"],
+      "image": "./static/img/image.png",
+      "cover": "./static/img/image.png",
+      "source": "https://github.com/yasserbdj96",
+      "details": "Advanced e-commerce solution with secure payment processing."
+    },
+    {
+      "title": "Project 4",
+      "description": "E-commerce platform with payment integration",
+      "tech": ["JavaScript", "Node.js", "MongoDB"],
+      "image": "./static/img/image.png",
+      "cover": "./static/img/image.png",
+      "source": "https://github.com/yasserbdj96",
+      "details": "Advanced e-commerce solution with secure payment processing."
+    }
+  ],
+  "blogPosts": [
+    {
+      "title": "Getting Started with React",
+      "excerpt": "Learn the fundamentals of React development and component architecture",
+      "date": "March 15, 2023",
+      "category": "Frontend",
+      "image": "./static/img/image.png",
+      "cover": "./static/img/image.png",
+      "readTime": "5 min read",
+      "content": "Full blog post content about React..."
+    },
+    {
+      "title": "REST API Best Practices",
+      "excerpt": "Essential guidelines for building robust RESTful APIs",
+      "date": "April 2, 2023",
+      "category": "Backend",
+      "image": "./static/img/image.png",
+      "cover": "./static/img/image.png",
+      "readTime": "8 min read",
+      "content": "Detailed guide to REST API development..."
+    },
+    {
+      "title": "test",
+      "excerpt": "test0",
+      "date": "April 2, 2025",
+      "category": "Backend",
+      "image": "./static/img/image.png",
+      "cover": "./static/img/image.png",
+      "readTime": "8 min read",
+      "content": "test..."
+    }
+  ]
+}

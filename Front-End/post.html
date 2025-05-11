@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Post Title - Developer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./static/style.css">
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <header>
+        <div class="container">
+            <h2>Blog Post Title</h2>
+            <p>Post subtitle or brief description</p>
+            <p class="post-meta">Posted on March 15, 2025 • 5 min read</p>
+        </div>
+    </header>
+
+    <section class="container post-content">
+        <img src="./img/blog-post1.jpg" alt="Featured Image" class="featured-image">
+        
+        <article>
+            <h3>Introduction</h3>
+            <p>Full blog post content goes here...</p>
+        </article>
+
+        <!--a href="blog.html" class="btn">Back to Blog</a-->
+    </section>
+
+    <script>
+        fetch('https://yasserbdj96.pythonanywhere.com/data.json')
+            .then(response => response.json())
+            .then(data => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const postId = urlParams.get('id');
+                const post = data.blogPosts[postId];
+
+                if (post) {
+                    document.querySelector('header h2').textContent = post.title;
+                    document.querySelector('header p').textContent = post.excerpt;
+                    document.querySelector('.post-meta').innerHTML = 
+                        `Posted on ${post.date} • ${post.readTime}`;
+                    document.querySelector('.featured-image').src = post.cover;
+                    document.querySelector('article').innerHTML = post.content;
+                }
+            })
+            .catch(error => console.error('Error loading blog post:', error));
+    </script>
+    <div id="footer-placeholder"></div>
+    <script src="./static/navigation-footer.js"></script>
+</body>
+</html>
