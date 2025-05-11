@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Title - Developer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./static/style.css">
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <header>
+        <div class="container">
+            <h2>Project Title</h2>
+            <p>Project category or short description</p>
+        </div>
+    </header>
+
+    <section class="container project-details">
+        <img src="" alt="Project Screenshot" class="project-hero">
+        <div class="project-content">
+            <h3>About the Project</h3>
+            <div class="project-tech">
+                <div class="tech-list">
+                    <!-- Dynamic tech list will be inserted here -->
+                </div>
+            </div>
+            <p>Detailed project description explaining the purpose, challenges, and solutions implemented.</p>
+
+            <div class="project-links">
+                <a href="#" class="btn source" id="source">View Source</a>
+            </div>
+        </div>
+    </section>
+    <script src="./static/app.js"></script>
+    <script>
+        (async function() {
+            const data = await loadDataOnce();
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = urlParams.get('id');
+            const project = data.projects[projectId];
+
+            if (project) {
+                document.title = project.title;
+                document.querySelector('header h2').textContent = project.title;
+                document.querySelector('header p').textContent = project.description;
+                document.querySelector('.project-hero').src = project.cover;
+                //document.querySelector('.project-content p').textContent = project.details;
+                // Handle details content
+                const detailsContainer = document.querySelector('.project-content p');
+                if (project.details) {
+                    if (isValidHTML(project.details)) {
+                        detailsContainer.innerHTML = project.details;
+                    } else {
+                        detailsContainer.textContent = project.details;
+                    }
+                } else {
+                    detailsContainer.textContent = "No project details available.";
+                }
+
+
+                document.querySelector('.tech-list').innerHTML = project.tech
+                    .map(tech => `<span class="tech-item">${tech}</span>`).join('');
+            }
+
+            const sourceLink = document.querySelector('#source');
+            if (project.source) {
+                sourceLink.href = project.source;
+            } else {
+                sourceLink.style.display = 'none';
+            }
+        })().catch(console.error); // 👈 Add the call + error handling
+    </script>
+
+    <div id="footer-placeholder"></div>
+    <script src="./static/navigation-footer.js"></script>
+</body>
+</html>

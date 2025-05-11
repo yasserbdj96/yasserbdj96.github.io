@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./static/style.css">
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+    <header>
+        <div class="container">
+            <h2>Yasserbdj96 Projects</h2>
+            <p>Sharing insights, updates, and ideas from my development journey</p>
+        </div>
+    </header>
+
+    <!-- Add filter section -->
+    
+
+    <section id="projects" class="container">
+        <h2>My Projects</h2>
+        <section id="filters" class="container">
+            <div id="tech-filters" class="tech-filters"></div>
+        </section>
+        <div class="projects-grid"></div>
+    </section>
+    <script src="./static/app.js"></script>
+    <script>
+        // Fetch and initialize projects
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchProjects();
+        });
+
+        async function fetchProjects() {
+            const data = await loadDataOnce();
+            const projects = data.projects;
+            initFilters(projects);
+            renderProjects(projects);
+        }
+        function initFilters(projects) {
+            const techFilters = document.getElementById('tech-filters');
+            const allTech = [...new Set(projects.flatMap(project => project.tech))].sort();
+            
+            techFilters.innerHTML = allTech.map(tech => `
+                <label class="filter-label">
+                    <input type="checkbox" value="${tech}" class="tech-filter">
+                    ${tech}
+                </label>
+            `).join('');
+
+            document.querySelectorAll('.tech-filter').forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    // Toggle active class on parent label
+                    checkbox.parentElement.classList.toggle('active', checkbox.checked);
+                    filterProjects(projects);
+                });
+            });
+        }
+
+        function renderProjects(projects) {
+            const grid = document.querySelector('.projects-grid');
+            grid.innerHTML = projects.map((project, index) => `
+                <a href="project.html?id=${index}" class="project-card" data-tech="${project.tech.join(',')}">
+                    <img src="${project.image}" class="project-image" alt="${project.title}">
+                    <h3>${project.title}</h3>
+                    <p>${project.description}</p>
+                    <div class="tech-list">
+                        ${project.tech.map(tech => `<span class="tech-item">${tech}</span>`).join('')}
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        function filterProjects(projects) {
+            const selected = Array.from(document.querySelectorAll('.tech-filter:checked'))
+                             .map(checkbox => checkbox.value);
+            
+            document.querySelectorAll('.project-card').forEach(card => {
+                const cardTech = card.dataset.tech.split(',');
+                const shouldShow = selected.length === 0 || 
+                                selected.every(tech => cardTech.includes(tech));
+                card.style.display = shouldShow ? 'block' : 'none';
+            });
+        }
+
+    </script>
+    <div id="footer-placeholder"></div>
+    <script src="./static/navigation-footer.js"></script>
+</body>
+</html>
