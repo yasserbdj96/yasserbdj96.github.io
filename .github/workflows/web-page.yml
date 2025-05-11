@@ -22,16 +22,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4  # Updated to v4
 
       - name: Setup Pages
-        uses: actions/configure-pages@v2
+        uses: actions/configure-pages@v5  # Updated to latest version
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3  # Correct action for Pages
         with:
           path: './Front-End/'
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4  # Updated to latest version
