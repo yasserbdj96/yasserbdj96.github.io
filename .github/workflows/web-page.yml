@@ -1,9 +1,8 @@
 name: Deploy static content to Pages
 
 on:
-  push:
-    branches: ["main"]
-  workflow_dispatch:
+  push:  # Trigger on every push to any branch
+  workflow_dispatch:  # Allow manual trigger
 
 permissions:
   contents: read
@@ -22,16 +21,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4  # Updated to v4
+        uses: actions/checkout@v4
 
       - name: Setup Pages
-        uses: actions/configure-pages@v5  # Updated to latest version
+        uses: actions/configure-pages@v5
 
       - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3  # Correct action for Pages
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './Front-End/'
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4  # Updated to latest version
+        uses: actions/deploy-pages@v4
