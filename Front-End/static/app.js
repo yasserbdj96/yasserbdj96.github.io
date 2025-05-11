@@ -15,3 +15,14 @@ async function loadDataOnce() {
 }
 
 window.loadDataOnce = loadDataOnce;
+
+// HTML validation check function
+const isValidHTML = (str) => {
+    try {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(str, "text/html");
+        return Array.from(doc.body.childNodes).some(node => node.nodeType === 1); // Check for element nodes
+    } catch (e) {
+        return false;
+    }
+};
