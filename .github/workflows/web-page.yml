@@ -27,13 +27,6 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v2
 
-      # Manually pin upload-artifact to avoid tag issues
-      - name: Preload upload-artifact
-        uses: actions/upload-artifact@v3.1.2  # This version is known to work
-        with:
-          name: dummy
-          path: README.md  # or any small existing file
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
