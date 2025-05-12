@@ -142,7 +142,7 @@ header {
 .project-details {
     display: grid;
     gap: 2rem;
-    padding: 4rem 0;
+    /*padding: 4rem 0;*/
 }
 
 .project-hero {
@@ -160,6 +160,8 @@ header {
     margin-top: 2rem;
     display: flex;
     gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
 }
 
 .btn {

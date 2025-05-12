@@ -16,6 +16,7 @@ async function loadDataOnce() {
 
 window.loadDataOnce = loadDataOnce;
 
+
 // HTML validation check function
 const isValidHTML = (str) => {
     try {
