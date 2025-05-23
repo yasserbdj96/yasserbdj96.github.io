@@ -1,0 +1,98 @@
+<!-- templates/add_edit.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2>{{ 'Edit' if entry else 'Add' }} {{ content_type.capitalize() }}</h2>
+        <form method="POST">
+            {% if content_type == 'project' %}
+                <div class="mb-3">
+                    <label class="form-label">Title</label>
+                    <input type="text" class="form-control" name="title" 
+                           value="{{ entry.title if entry }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" name="description" rows="3" required>
+                        {{- entry.description if entry -}}
+                    </textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Technologies (comma-separated)</label>
+                    <input type="text" class="form-control" name="tech" 
+                           value="{{ ', '.join(entry.tech) if entry }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Image Path</label>
+                    <input type="text" class="form-control" name="image" 
+                           value="{{ entry.image if entry }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Cover Path</label>
+                    <input type="text" class="form-control" name="cover" 
+                           value="{{ entry.cover if entry }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Source URL</label>
+                    <input type="url" class="form-control" name="source" 
+                           value="{{ entry.source if entry }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Details</label>
+                    <textarea class="form-control" name="details" rows="5" required>
+                        {{- entry.details if entry -}}
+                    </textarea>
+                </div>
+
+            {% else %}
+                <div class="mb-3">
+                    <label class="form-label">Title</label>
+                    <input type="text" class="form-control" name="title" 
+                           value="{{ entry.title if entry }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Excerpt</label>
+                    <textarea class="form-control" name="excerpt" rows="3" required>
+                        {{- entry.excerpt if entry -}}
+                    </textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Date</label>
+                    <input type="text" class="form-control" name="date" 
+                           value="{{ entry.date if entry }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Category</label>
+                    <input type="text" class="form-control" name="category" 
+                           value="{{ entry.category if entry }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Image Path</label>
+                    <input type="text" class="form-control" name="image" 
+                           value="{{ entry.image if entry }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Cover Path</label>
+                    <input type="text" class="form-control" name="cover" 
+                           value="{{ entry.cover if entry }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Read Time</label>
+                    <input type="text" class="form-control" name="readTime" 
+                           value="{{ entry.readTime if entry }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Content</label>
+                    <textarea class="form-control" name="content" rows="10" required>
+                        {{- entry.content if entry -}}
+                    </textarea>
+                </div>
+            {% endif %}
+
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

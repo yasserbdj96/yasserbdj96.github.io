@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Contact - Developer Portfolio</title>
+    <title>Contact - Yasserbdj96</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./static/style.css">
@@ -16,14 +16,46 @@
         </div>
     </header>
     <section class="container">
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea rows="6" placeholder="Your Message" required></textarea>
+        <form id="contactForm">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
             <button type="submit">Send Message</button>
         </form>
     </section>
     <div id="footer-placeholder"></div>
     <script src="./static/navigation-footer.js"></script>
+    
+        <script>
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: this.name.value,
+                email: this.email.value,
+                message: this.message.value
+            };
+            
+            try {
+                const response = await fetch('http://127.0.0.1:8080/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    alert('Message sent successfully!');
+                    this.reset();
+                } else {
+                    alert('Error: ' + (result.error || 'Failed to send message'));
+                }
+            } catch (error) {
+                alert('Network error: ' + error.message);
+            }
+        });
+        </script>
 </body>
 </html>

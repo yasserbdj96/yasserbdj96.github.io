@@ -10,7 +10,14 @@ fetch('./templates/navigation.html')
 // Load footer
 fetch('./templates/footer.html')
     .then(response => response.text())
-    .then(data => document.getElementById('footer-placeholder').innerHTML = data)
+    .then(data => {
+        const currentYear = new Date().getFullYear();
+        const updatedData = data.replace(
+            /&copy;.*?<\/p>/i,
+            `&copy; ${currentYear} yasserbdj96. All rights reserved.</p>`
+        );
+        document.getElementById('footer-placeholder').innerHTML = updatedData;
+    })
     .catch(error => console.error('Error loading footer:', error));
 
 // Mobile menu initialization
