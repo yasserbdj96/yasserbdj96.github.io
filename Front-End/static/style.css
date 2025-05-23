@@ -287,6 +287,10 @@ footer {
     margin-top: auto;
 }
 
+#footer-placeholder{
+    padding: 30px 0 0 0;
+}
+
 .social-links {
     display: flex;
     gap: 1rem;
@@ -510,6 +514,7 @@ nav .container {
     color: var(--primary);
     font-size: 1.5rem;
     text-decoration: none;
+    width: 300px;
 }
 
 .sponsor-button {
@@ -527,3 +532,209 @@ nav .container {
     .sponsor-button:hover {
         background-color: #d3398c;
     }
+
+
+        /* Add these styles to your existing CSS */
+        .header-content {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /*padding: 4rem 0;*/
+        }
+        
+        .profile-container {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .profile-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+        }
+        
+        .status-bubble {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: #00ff88;
+            border-radius: 50%;
+            border: 3px solid var(--card-bg);
+            z-index: 2;
+        }
+        
+        .status-popup {
+            position: absolute;
+            bottom: 40px;
+            right: -20px;
+            background-color: var(--primary);
+            color: var(--dark-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            width: max-content;
+            max-width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .status-popup::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 25px;
+            border-width: 10px 10px 0;
+            border-style: solid;
+            border-color: var(--primary) transparent transparent;
+        }
+        
+        .profile-container:hover .status-popup {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(-10px);
+        }
+        
+        .header-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-text p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+/* Pricing Section */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.pricing-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s;
+    position: relative;
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+}
+
+.pricing-card.featured {
+    border: 2px solid var(--primary);
+    transform: scale(1.05);
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 1.5rem 0;
+    color: var(--primary);
+}
+
+.price span {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.price-features {
+    list-style: none;
+    margin: 2rem 0;
+    text-align: left;
+}
+
+.price-features li {
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.price-features li.check::before {
+  content: "✓";
+  color: var(--primary);
+  margin-right: 0.5em;
+}
+
+.price-features li.cross::before {
+  content: "×";
+  color: red;
+  margin-right: 0.5em;
+}
+
+
+.plan-details {
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+.plan-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.payment-form {
+    margin-top: 2rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.payment-form input {
+    width: 100%;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 6px;
+    color: var(--text-light);
+}
+
+.plan-price {
+    font-size: 2rem;
+    color: var(--primary);
+    margin: 1rem 0;
+}
+
+.plan-features {
+    list-style: none;
+    margin: 1.5rem 0;
+}
+
+.plan-features li {
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}

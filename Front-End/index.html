@@ -6,19 +6,25 @@
     <title>Yasserbdj96 Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./static/style.css">
+    <link rel="icon" type="image/png" href="static/img/yasserbdj96_icon.png">
 </head>
 <body>
     <div id="nav-placeholder"></div>
-    <header>
-        <div class="container">
-            <h2>Yasserbdj96 Projects</h2>
-            <p>Sharing insights, updates, and ideas from my development journey</p>
+<header>
+        <div class="container header-content">
+            <div class="profile-container">
+                <img src="https://avatars.githubusercontent.com/u/24677945?v=4" alt="Yasserbdj96" class="profile-image">
+                <div class="status-bubble"></div>
+                <div class="status-popup">Online - Available for collaborations</div>
+            </div>
+            <div class="header-text">
+                <h2>Yasserbdj96 Projects</h2>
+                <p>Sharing insights, updates, and ideas from my development journey</p>
+            </div>
         </div>
     </header>
 
     <!-- Add filter section -->
-    
-
     <section id="projects" class="container">
         <h2>My Projects</h2>
         <section id="filters" class="container">
@@ -26,6 +32,12 @@
         </section>
         <div class="projects-grid"></div>
     </section>
+
+    <section id="pricing" class="container">
+    <h2>Project Pricing</h2>
+    <div id="pricing-container" class="pricing-grid"></div>
+    </section>
+
     <script src="./static/app.js"></script>
     <script>
         // Fetch and initialize projects
@@ -95,6 +107,35 @@
         }
 
     </script>
+    <script>
+  fetch('pricing.json')
+    .then(response => response.json())
+    .then(plans => {
+      const container = document.getElementById('pricing-container');
+      plans.forEach(plan => {
+        const card = document.createElement('div');
+        card.className = 'pricing-card' + (plan.featured ? ' featured' : '');
+
+        card.innerHTML = `
+          <h3>${plan.title}</h3>
+          <div class="price">${plan.price}<span>${plan.unit}</span></div>
+            <ul class="price-features">
+            ${plan.features.map(feature => {
+                const isCheck = feature.startsWith("✓");
+                const isCross = feature.startsWith("×");
+                const className = isCheck ? "check" : isCross ? "cross" : "";
+                const cleanText = feature.replace(/^[✓×]\s*/, ""); // remove ✓ or × and optional space
+                return `<li class="${className}">${cleanText}</li>`;
+            }).join('')}
+            </ul>
+
+          <a href="${plan.link}" class="btn">${plan.button}</a>
+        `;
+        container.appendChild(card);
+      });
+    })
+    .catch(error => console.error('Error loading pricing data:', error));
+</script>
     <div id="footer-placeholder"></div>
     <script src="./static/navigation-footer.js"></script>
 </body>

@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Starter Python Script",
+    "price": "$49",
+    "unit": "/Project",
+    "features": [
+      "✓ Simple Python Script",
+      "✓ Basic Documentation",
+      "✓ Email Support",
+      "× GUI or Web Integration"
+    ],
+    "link": "pricing.html?plan=starter",
+    "button": "Choose Plan",
+    "featured": false
+  },
+  {
+    "title": "Pro Automation & Web Scraping",
+    "price": "$149",
+    "unit": "/Project",
+    "features": [
+      "✓ Web Scraping & Automation",
+      "✓ API/Database Integration",
+      "✓ Basic GUI Support",
+      "✓ Email + Chat Support"
+    ],
+    "link": "pricing.html?plan=pro",
+    "button": "Choose Plan",
+    "featured": true
+  },
+  {
+    "title": "Custom Enterprise Solution",
+    "price": "Custom",
+    "unit": "",
+    "features": [
+      "✓ Dedicated Development Team",
+      "✓ Scalable Systems & Maintenance",
+      "✓ White-label & NDA Support",
+      "✓ Ongoing Support & Reporting"
+    ],
+    "link": "pricing.html?plan=enterprise",
+    "button": "Choose Plan",
+    "featured": false
+  }
+]
