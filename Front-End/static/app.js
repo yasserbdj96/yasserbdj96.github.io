@@ -6,8 +6,20 @@ async function loadDataOnce() {
     if (appData) return appData;
 
     try {
-        const response = await fetch('./data.json');
+        let response;
+        try {
+            response = await fetch('https://yasserbdj96.pythonanywhere.com/data.json');
+            if (!response.ok) throw new Error('Failed to load remote data');
+            } catch (error) {
+            console.warn('Remote fetch failed, falling back to local data:', error);
+            response = await fetch('./data.json');
+            }
+
         appData = await response.json();
+        //console.log(data);
+
+        //const response = await fetch('./data.json');
+        //appData = await response.json();
         return appData;
     } catch (error) {
         console.error("Error fetching data:", error);
