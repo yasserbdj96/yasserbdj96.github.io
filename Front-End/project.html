@@ -7,6 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./static/style.css">
     <link rel="icon" type="image/png" href="static/img/yasserbdj96_icon.png">
+    <!-- Add Markdown rendering library -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
     <div id="nav-placeholder"></div>
@@ -27,7 +29,7 @@
                     <!-- Dynamic tech list will be inserted here -->
                 </div>
             </div>
-            <p>Detailed project description explaining the purpose, challenges, and solutions implemented.</p>
+            <div class="project-details-container"></div> <!-- Updated container for details -->
 
             <div class="project-links">
                 <a href="#" class="btn source" id="source">View Source</a>
@@ -36,6 +38,26 @@
     </section>
     <script src="./static/app.js"></script>
     <script>
+        // Function to fetch and render Markdown
+        async function renderMarkdownDetails(markdownUrl, container) {
+            try {
+                const response = await fetch(markdownUrl);
+                const markdown = await response.text();
+                container.innerHTML = marked.parse(markdown);
+                
+                // Open external links in new tab
+                container.querySelectorAll('a').forEach(link => {
+                    if (link.href && !link.href.startsWith(window.location.origin)) {
+                        link.target = '_blank';
+                        link.rel = 'noopener noreferrer';
+                    }
+                });
+            } catch (error) {
+                console.error('Error loading Markdown:', error);
+                container.innerHTML = '<p>Failed to load project details. Please try again later.</p>';
+            }
+        }
+
         (async function() {
             const data = await loadDataOnce();
             const urlParams = new URLSearchParams(window.location.search);
@@ -47,19 +69,28 @@
                 document.querySelector('header h2').textContent = project.title;
                 document.querySelector('header p').textContent = project.description;
                 document.querySelector('.project-hero').src = project.cover;
-                //document.querySelector('.project-content p').textContent = project.details;
+                
+                // Get the details container
+                const detailsContainer = document.querySelector('.project-details-container');
+                
                 // Handle details content
-                const detailsContainer = document.querySelector('.project-content p');
                 if (project.details) {
-                    if (isValidHTML(project.details)) {
-                        detailsContainer.innerHTML = project.details;
+                    // Check if it's a GitHub README URL
+                    if (project.details.startsWith('https://github.com/') && project.details.includes('/blob/') && project.details.endsWith('.md')) {
+                        // Convert to raw Markdown URL
+                        const rawUrl = project.details
+                            .replace('github.com', 'raw.githubusercontent.com')
+                            .replace('/blob/', '/');
+                            
+                        // Render Markdown content
+                        await renderMarkdownDetails(rawUrl, detailsContainer);
                     } else {
-                        detailsContainer.textContent = project.details;
+                        // Handle existing HTML content
+                        detailsContainer.innerHTML = project.details;
                     }
                 } else {
-                    detailsContainer.textContent = "No project details available.";
+                    detailsContainer.innerHTML = '<p>No project details available.</p>';
                 }
-
 
                 document.querySelector('.tech-list').innerHTML = project.tech
                     .map(tech => `<span class="tech-item">${tech}</span>`).join('');
@@ -71,7 +102,7 @@
             } else {
                 sourceLink.style.display = 'none';
             }
-        })().catch(console.error); // 👈 Add the call + error handling
+        })().catch(console.error);
     </script>
 
     <div id="footer-placeholder"></div>

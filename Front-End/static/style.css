@@ -738,3 +738,42 @@ nav .container {
     align-items: center;
     gap: 0.5rem;
 }
+
+/* Add this to style.css */
+/*.project-details-container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem 0;
+}*/
+
+.project-details-container pre {
+    background: var(--card-bg);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow: auto;
+}
+
+.project-details-container code {
+    /*background: #f4f4f4;*/
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+}
+
+.project-details-container h1,
+.project-details-container h2,
+.project-details-container h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.project-details-container ul,
+.project-details-container ol {
+    padding-left: 2rem;
+    margin: 1rem 0;
+}
+
+
+table{
+        padding: 10px;
+}
