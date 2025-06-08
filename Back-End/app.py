@@ -209,10 +209,10 @@ def handle_contact():
             subject=f"New contact form submission from {name}",
             recipients=['your-receiving-email@example.com'],  # Where you want to receive messages
             body=f"""
-            Name: {name}
-            Email: {email}
-            Message: {message}
-            """
+Name: {name}
+Email: {email}
+Message: {message}
+"""
         )
         mail.send(msg)
         return jsonify({'success': True}), 200
