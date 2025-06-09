@@ -140,7 +140,7 @@ header {
 
 /* Project View Page Styles */
 .project-details {
-    display: grid;
+    /*display: grid;*/
     gap: 2rem;
     /*padding: 4rem 0;*/
 }
