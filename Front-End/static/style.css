@@ -510,6 +510,7 @@ nav .container {
 }
 
 .logo {
+    margin-top: 5px;
     font-weight: 600;
     color: var(--primary);
     font-size: 1.5rem;
