@@ -1,0 +1,59 @@
+<svg width="400" height="100" viewBox="0 0 400 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .logo-text {
+      font-family: 'Courier New', monospace;
+      font-size: 60px;
+      font-weight: bold;
+      fill: #333;
+      text-anchor: middle;
+      dominant-baseline: central;
+      letter-spacing: -2px;
+    }
+    .pixel-block {
+      fill: #00ff88; /* Changed to #00ff88 */
+      opacity: 0.7;
+    }
+    .circuit-line {
+      stroke: #00ff88; /* Changed to #00ff88 */
+      stroke-width: 2;
+      opacity: 0.6;
+      stroke-linecap: round;
+      stroke-dasharray: 4 2;
+    }
+    .glow-filter {
+      filter: url(#glow);
+    }
+  </style>
+
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+      <feFlood flood-color="#00ff88" flood-opacity="0.8" result="flood" /> <!-- Changed to #00ff88 -->
+      <feComposite in="flood" in2="blur" operator="in" result="glowEffect" />
+      <feMerge>
+        <feMergeNode in="SourceGraphic" />
+        <feMergeNode in="glowEffect" />
+      </feMerge>
+    </filter>
+
+    <pattern id="gridPattern" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="4" height="4" fill="#666" opacity="0.05"/>
+      <rect x="4" y="4" width="4" height="4" fill="#666" opacity="0.05"/>
+    </pattern>
+  </defs>
+
+  <rect width="100%" height="100%" fill="none"/>
+  <text x="200" y="50" class="logo-text glow-filter">yasserbdj96</text>
+  
+  <path d="M 60 70 C 80 85, 120 85, 140 70" class="circuit-line"/>
+  <path d="M 340 30 C 320 15, 280 15, 260 30" class="circuit-line"/>
+  <path d="M 20 50 L 40 50 L 40 60" class="circuit-line"/>
+  <path d="M 380 50 L 360 50 L 360 40" class="circuit-line"/>
+
+  <rect x="30" y="15" width="8" height="8" class="pixel-block"/>
+  <rect x="360" y="75" width="8" height="8" class="pixel-block"/>
+  <rect x="150" y="20" width="8" height="8" class="pixel-block"/>
+  <rect x="240" y="80" width="8" height="8" class="pixel-block"/>
+  <rect x="195" y="40" width="8" height="8" class="pixel-block"/>
+  <rect x="205" y="60" width="8" height="8" class="pixel-block"/>
+</svg>

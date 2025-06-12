@@ -285,6 +285,7 @@ footer {
     background: var(--card-bg);
     padding: 3rem 0;
     margin-top: auto;
+        text-align: center;
 }
 
 #footer-placeholder{
@@ -292,14 +293,15 @@ footer {
 }
 
 .social-links {
-    display: flex;
-    gap: 1rem;
+    /*display: flex;
+    gap: 1rem;*/
     margin-bottom: 1rem;
 }
 
 .social-links a {
     color: var(--primary);
     text-decoration: none;
+    padding: 10px;
 }
 
 .container:not(:first-child) {
@@ -471,11 +473,12 @@ nav .container {
 @media (max-width: 768px) {
     .hamburger {
         display: block;
+        z-index: 1000;
     }
 
     .nav-links {
         position: fixed;
-        top: 70px;
+        top: 137px;
         left: -100%;
         width: 100%;
         height: calc(100vh - 70px);
@@ -580,8 +583,8 @@ nav .container {
         
         .status-popup {
             position: absolute;
-            bottom: 40px;
-            right: -20px;
+            bottom: 30px;
+            right: -15px;
             background-color: var(--primary);
             color: var(--dark-bg);
             padding: 0.5rem 1rem;
@@ -777,4 +780,21 @@ nav .container {
 
 table{
         padding: 10px;
+}
+
+
+.nav-desktop {
+    display: block;
+}
+.nav-mobile {
+    display: none;
+}
+@media (max-width: 768px) {
+    .nav-desktop {
+        display: none;
+    }
+    .nav-mobile {
+        display: block;
+        margin-left: -100%;
+    }
 }
