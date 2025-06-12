@@ -603,7 +603,7 @@ nav .container {
         .status-popup::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -8px;
             right: 25px;
             border-width: 10px 10px 0;
             border-style: solid;
