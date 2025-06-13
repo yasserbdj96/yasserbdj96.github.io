@@ -496,7 +496,7 @@ nav .container {
 
     .nav-links {
         position: fixed;
-        top: 137px;
+        top: 97px;
         left: -100%;
         width: 100%;
         height: calc(100vh - 70px);
