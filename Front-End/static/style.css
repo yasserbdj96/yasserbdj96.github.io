@@ -1,9 +1,25 @@
 :root {
-    --primary: #00ff88;
+    --primary: #02a742;
     --dark-bg: #1a1a1a;
     --card-bg: #252525;
     --text-light: #f0f0f0;
     --text-muted: #cccccc;
+    --sponsor-bg: #ea4aaa;
+    --sponsor-hover-bg: #d3398c;
+    --gradient-white: #ffffff;
+    --profile-border-black: black;
+    --profile-border-white: white;
+    --profile-border-green: #02a742;
+    --profile-border-red: red;
+    --box-shadow-glow: rgba(0, 255, 136, 0.3);
+    --box-shadow-glow-hover: rgba(0, 255, 136, 0.5);
+    --form-bg: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.1);
+    --shadow-post-hover: rgba(0, 0, 0, 0.2);
+    --shadow-project-card: rgba(0, 0, 0, 0.05);
+    --shadow-project-card-hover: rgba(0, 0, 0, 0.1);
+    --status-green: #02a742;
+    --plan-price-muted: red;
 }
 
 * {
@@ -83,10 +99,12 @@ header {
     transition: transform 0.3s;
     text-decoration: none;
     color: inherit;
+    box-shadow: 0 4px 6px var(--shadow-project-card);
 }
 
 .project-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 15px var(--shadow-project-card-hover);
 }
 
 .project-image {
@@ -198,7 +216,7 @@ header {
 
 .blog-post:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px var(--shadow-post-hover);
 }
 
 .post-thumbnail {
@@ -256,7 +274,7 @@ header {
 .post-meta:last-child {
     font-size: 0.85rem;
     color: var(--text-muted);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--border-light);
     padding-top: 0.75rem;
     margin-top: auto;
 }
@@ -525,8 +543,8 @@ nav .container {
         display: inline-block;
         margin-top: 1rem;
         padding: 0.6rem 1.2rem;
-        background-color: #ea4aaa;
-        color: #fff;
+        background-color: var(--sponsor-bg);
+        color: var(--text-light);
         font-weight: bold;
         border-radius: 6px;
         text-decoration: none;
@@ -534,7 +552,7 @@ nav .container {
     }
 
     .sponsor-button:hover {
-        background-color: #d3398c;
+        background-color: var(--sponsor-hover-bg);
     }
 
 
@@ -558,16 +576,16 @@ nav .container {
     height: 160px;
     border-radius: 50%;
     background: conic-gradient(
-        black 0deg 90deg,
-        white 90deg 180deg,
-        green 180deg 270deg,
-        red 270deg 360deg
+        var(--profile-border-black) 0deg 90deg,
+        var(--profile-border-white) 90deg 180deg,
+        var(--profile-border-green) 180deg 270deg,
+        var(--profile-border-red) 270deg 360deg
     );
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 5px; /* space for border effect */
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+    box-shadow: 0 0 20px var(--box-shadow-glow);
     transition: all 0.3s ease;
     cursor: pointer;
 }
@@ -581,8 +599,7 @@ nav .container {
 
         
         .profile-image:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+            box-shadow: 0 0 30px var(--box-shadow-glow-hover);
         }
         
         .status-bubble {
@@ -591,7 +608,7 @@ nav .container {
             right: 10px;
             width: 20px;
             height: 20px;
-            background-color: #00ff88;
+            background-color: var(--status-green);
             border-radius: 50%;
             border: 3px solid var(--card-bg);
             z-index: 2;
@@ -613,7 +630,7 @@ nav .container {
             width: max-content;
             max-width: 200px;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px var(--shadow-project-card);
         }
         
         .status-popup::after {
@@ -641,7 +658,7 @@ nav .container {
         .header-text h2 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            background: linear-gradient(90deg, #fff, var(--primary));
+            background: linear-gradient(90deg, var(--primary), #ff0000);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -710,7 +727,7 @@ nav .container {
 
 .price-features li.cross::before {
   content: "×";
-  color: red;
+  color: var(--plan-price-muted);
   margin-right: 0.5em;
 }
 
@@ -801,17 +818,21 @@ table{
 
 .nav-desktop {
     display: block;
+    height: 60px;
 }
 .nav-mobile {
     display: none;
+    height: 60px;
 }
 @media (max-width: 768px) {
     .nav-desktop {
         display: none;
+        height: 60px;
     }
     .nav-mobile {
         display: block;
         margin-left: -100%;
+        height: 60px;
     }
 }
 
