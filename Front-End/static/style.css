@@ -44,6 +44,12 @@ body > section {
     width: 100%;
 }
 
+#nav-placeholder{
+    position: fixed;
+    width: 100%;
+    z-index: 9999999;
+}
+
 .container {
     width: 100%;
     max-width: 1200px;
