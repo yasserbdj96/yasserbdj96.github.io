@@ -1,0 +1,401 @@
+{% extends "base.html" %}
+
+{% block title %}Publish - Dashboard{% endblock %}
+
+{% block extra_css %}
+<style>
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.dashboard-header h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: var(--text-primary);
+}
+
+.btn-group {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.content-card {
+    background: var(--card-bg);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.content-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: var(--bg-color);
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.card-text {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    border-radius: 0.75rem;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.section-header {
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-secondary);
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.tech-tag {
+    background: var(--bg-color);
+    color: var(--text-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+    .dashboard-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .btn-group {
+        flex-direction: column;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Content Management</h1>
+    <div class="btn-group">
+        <button onclick="openModal('project')" class="btn btn-primary">+ New Project</button>
+        <button onclick="openModal('blog')" class="btn btn-success">+ New Blog Post</button>
+    </div>
+</div>
+
+<!-- Projects Section -->
+<div class="section-header">
+    <h2 class="section-title">Projects</h2>
+</div>
+<div class="content-grid" id="projects-grid">
+    {% if projects %}
+        {% for project in projects %}
+        <div class="content-card" data-id="{{ project.id }}">
+            <img src="{{ project.image }}" alt="{{ project.title }}" class="card-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect fill=%22%23ddd%22 width=%22400%22 height=%22200%22/%3E%3C/svg%3E'">
+            <div class="card-body">
+                <h3 class="card-title">{{ project.title }}</h3>
+                <p class="card-text">{{ project.description[:100] }}...</p>
+                <div class="tech-tags">
+                    {% for tech in project.tech if project.tech is iterable and project.tech is not string %}
+                        <span class="tech-tag">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+                <div class="card-footer">
+                    <button onclick="editContent('project', '{{ project.id }}')" class="btn btn-sm btn-secondary">Edit</button>
+                    <button onclick="deleteContent('project', '{{ project.id }}')" class="btn btn-sm btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">
+            <p>No projects yet. Create your first project!</p>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Blog Posts Section -->
+<div class="section-header">
+    <h2 class="section-title">Blog Posts</h2>
+</div>
+<div class="content-grid" id="blog-grid">
+    {% if blog_posts %}
+        {% for post in blog_posts %}
+        <div class="content-card" data-id="{{ post.id }}">
+            <img src="{{ post.image }}" alt="{{ post.title }}" class="card-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect fill=%22%23ddd%22 width=%22400%22 height=%22200%22/%3E%3C/svg%3E'">
+            <div class="card-body">
+                <h3 class="card-title">{{ post.title }}</h3>
+                <p class="card-text">{{ post.excerpt[:100] }}...</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">{{ post.category }}</span>
+                    <span class="tech-tag">{{ post.read_time }}</span>
+                </div>
+                <div class="card-footer">
+                    <button onclick="editContent('blog', '{{ post.id }}')" class="btn btn-sm btn-secondary">Edit</button>
+                    <button onclick="deleteContent('blog', '{{ post.id }}')" class="btn btn-sm btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">
+            <p>No blog posts yet. Write your first post!</p>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Modal -->
+<div id="contentModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitle">Add Content</h3>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="contentForm">
+                <input type="hidden" id="contentType" name="content_type">
+                <input type="hidden" id="contentId" name="content_id">
+                
+                <div id="formFields"></div>
+                
+                <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Save</button>
+                    <button type="button" onclick="closeModal()" class="btn btn-secondary">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const formTemplates = {
+    project: [
+        {name: 'title', label: 'Title', type: 'text', required: true},
+        {name: 'description', label: 'Description', type: 'textarea', required: true},
+        {name: 'tech', label: 'Technologies (comma-separated)', type: 'text', required: true},
+        {name: 'image', label: 'Image URL', type: 'text', required: true},
+        {name: 'cover', label: 'Cover URL', type: 'text', required: true},
+        {name: 'source', label: 'Source URL', type: 'url', required: true},
+        {name: 'details', label: 'Details', type: 'textarea', required: true, rows: 5}
+    ],
+    blog: [
+        {name: 'title', label: 'Title', type: 'text', required: true},
+        {name: 'excerpt', label: 'Excerpt', type: 'textarea', required: true},
+        {name: 'date', label: 'Date', type: 'text', required: true, placeholder: 'e.g., Jan 1, 2025'},
+        {name: 'category', label: 'Category', type: 'text', required: true},
+        {name: 'image', label: 'Image URL', type: 'text', required: true},
+        {name: 'cover', label: 'Cover URL', type: 'text', required: true},
+        {name: 'readTime', label: 'Read Time', type: 'text', required: true, placeholder: 'e.g., 5 min read'},
+        {name: 'content', label: 'Content', type: 'textarea', required: true, rows: 10}
+    ]
+};
+
+function openModal(type, data = null) {
+    const modal = document.getElementById('contentModal');
+    const form = document.getElementById('contentForm');
+    const fields = document.getElementById('formFields');
+    
+    document.getElementById('contentType').value = type;
+    document.getElementById('modalTitle').textContent = data ? `Edit ${type}` : `Add ${type}`;
+    document.getElementById('contentId').value = data?.id || '';
+    
+    fields.innerHTML = formTemplates[type].map(field => `
+        <div class="mb-3">
+            <label class="form-label">${field.label}</label>
+            ${field.type === 'textarea' 
+                ? `<textarea class="form-control" name="${field.name}" ${field.required ? 'required' : ''} rows="${field.rows || 3}" placeholder="${field.placeholder || ''}">${data?.[field.name] || ''}</textarea>`
+                : `<input type="${field.type}" class="form-control" name="${field.name}" value="${data?.[field.name] || ''}" ${field.required ? 'required' : ''} placeholder="${field.placeholder || ''}">`
+            }
+        </div>
+    `).join('');
+    
+    modal.classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('contentModal').classList.remove('active');
+    document.getElementById('contentForm').reset();
+}
+
+async function editContent(type, id) {
+    try {
+        const response = await fetch(`/api/${type}/${id}`);
+        const data = await response.json();
+        
+        // Handle tech array for projects
+        if (type === 'project' && Array.isArray(data.tech)) {
+            data.tech = data.tech.join(', ');
+        }
+        
+        openModal(type, data);
+    } catch (error) {
+        alert('Error loading content');
+    }
+}
+
+async function deleteContent(type, id) {
+    if (!confirm('Are you sure you want to delete this item?')) return;
+    
+    try {
+        const response = await fetch(`/api/${type}/${id}`, {
+            method: 'DELETE'
+        });
+        
+        if (response.ok) {
+            document.querySelector(`[data-id="${id}"]`).remove();
+            showNotification('Deleted successfully', 'success');
+        }
+    } catch (error) {
+        showNotification('Error deleting content', 'error');
+    }
+}
+
+document.getElementById('contentForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    const type = data.content_type;
+    const id = data.content_id;
+    
+    delete data.content_type;
+    delete data.content_id;
+    
+    try {
+        const url = id ? `/api/${type}/${id}` : `/api/${type}`;
+        const method = id ? 'PUT' : 'POST';
+        
+        const response = await fetch(url, {
+            method: method,
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        });
+        
+        if (response.ok) {
+            showNotification(`${type} saved successfully`, 'success');
+            setTimeout(() => location.reload(), 1000);
+        }
+    } catch (error) {
+        showNotification('Error saving content', 'error');
+    }
+});
+
+function showNotification(message, type) {
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type}`;
+    alert.textContent = message;
+    alert.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 250px;';
+    
+    document.body.appendChild(alert);
+    setTimeout(() => alert.remove(), 3000);
+}
+
+// Close modal on outside click
+document.getElementById('contentModal').addEventListener('click', (e) => {
+    if (e.target.id === 'contentModal') closeModal();
+});
+</script>
+{% endblock %}

@@ -1,22 +1,45 @@
-
-<!-- templates/login.html -->
 {% extends "base.html" %}
 
+{% block title %}{{ get_text('login') }} - {{ get_text('app_name') }}{% endblock %}
+
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <h2 class="mb-4">Login</h2>
-        <form method="POST">
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" name="username" required>
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>{{ get_text('welcome_back') }}</h2>
+        <p class="auth-subtitle">{{ get_text('login_to_account') }}</p>
+        
+        <form method="POST" action="{{ url_for('login') }}" class="auth-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            
+            <div class="form-group">
+                <label for="email">{{ get_text('email_address') }}</label>
+                <input type="email" id="email" name="email" required 
+                       class="form-control" autofocus
+                       placeholder="{{ get_text('email_address') }}">
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+            
+            <div class="form-group">
+                <label for="password">{{ get_text('password') }}</label>
+                <input type="password" id="password" name="password" 
+                       required class="form-control"
+                       placeholder="{{ get_text('password') }}">
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            
+            <div class="form-group form-check">
+                <input type="checkbox" id="remember" name="remember" class="form-check-input">
+                <label for="remember" class="form-check-label">{{ get_text('remember_me') }}</label>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block">{{ get_text('login') }}</button>
         </form>
+        
+        <div class="auth-links">
+            <a href="{{ url_for('forgot_password') }}">{{ get_text('forgot_password') }}</a>
+        </div>
+        
+        <div class="auth-footer">
+            {{ get_text('dont_have_account') }} <a href="{{ url_for('register') }}">{{ get_text('register_here') }}</a>
+        </div>
     </div>
 </div>
 {% endblock %}

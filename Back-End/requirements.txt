@@ -1,1 +1,12 @@
-flask_mail
+Flask==3.0.0
+Flask-SQLAlchemy==3.1.1
+Flask-Bcrypt==1.0.1
+Flask-Mail==0.9.1
+Flask-Limiter==3.5.0
+Flask-WTF==1.2.1
+pyotp==2.9.0
+qrcode==7.4.2
+Pillow==10.1.0
+itsdangerous==2.1.2
+python-dotenv==1.0.0
+email-validator==2.1.0

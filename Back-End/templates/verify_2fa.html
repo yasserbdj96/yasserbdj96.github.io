@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Two-Factor Authentication - Flask Auth App{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>Two-Factor Authentication</h2>
+        <p class="auth-subtitle">Enter the 6-digit code from your authenticator app</p>
+        
+        <form method="POST" action="{{ url_for('verify_2fa') }}" class="auth-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            
+            <div class="form-group">
+                <label for="token">Authentication Code</label>
+                <input type="text" id="token" name="token" required 
+                       pattern="[0-9]{6}" maxlength="6" class="form-control" 
+                       placeholder="000000" autofocus
+                       style="text-align: center; font-size: 1.5rem; letter-spacing: 0.5rem;">
+                <small class="form-text">Enter the 6-digit code from Google Authenticator</small>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block">Verify</button>
+        </form>
+        
+        <div class="auth-footer">
+            <a href="{{ url_for('logout') }}">Cancel and logout</a>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    // Auto-submit when 6 digits are entered
+    document.getElementById('token').addEventListener('input', function(e) {
+        if (e.target.value.length === 6) {
+            e.target.form.submit();
+        }
+    });
+</script>
+{% endblock %}
+{% endblock %}

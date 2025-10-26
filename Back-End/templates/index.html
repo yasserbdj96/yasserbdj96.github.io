@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Flask Auth App{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>Welcome to Flask Auth App</h1>
+    <p class="hero-subtitle">A secure authentication system with 2FA support</p>
+    
+    {% if session.get('user_id') %}
+        <div class="hero-actions">
+            <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
+        </div>
+    {% else %}
+        <div class="hero-actions">
+            <a href="{{ url_for('register') }}" class="btn btn-primary">Get Started</a>
+            <a href="{{ url_for('login') }}" class="btn btn-secondary">Login</a>
+        </div>
+    {% endif %}
+</div>
+
+<div class="features">
+    <h2>Features</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>Secure Authentication</h3>
+            <p>Password hashing with bcrypt for maximum security</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3>Two-Factor Authentication</h3>
+            <p>Optional 2FA using Google Authenticator</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔑</div>
+            <h3>Password Recovery</h3>
+            <p>Secure email-based password reset</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Rate Limiting</h3>
+            <p>Protection against brute-force attacks</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

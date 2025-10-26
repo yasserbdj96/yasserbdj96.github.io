@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Enable 2FA - Flask Auth App{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>Enable Two-Factor Authentication</h2>
+        <p class="auth-subtitle">Scan the QR code with Google Authenticator</p>
+        
+        <div style="background-color: var(--bg-color); padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+            <h4 style="margin-bottom: 1rem; color: var(--text-primary);">Step 1: Install an Authenticator App</h4>
+            <p style="margin-bottom: 0.5rem; color: #6b7280;">Download one of these apps on your phone:</p>
+            <ul style="margin-left: 1.5rem; color: #6b7280;">
+                <li>Google Authenticator</li>
+                <li>Microsoft Authenticator</li>
+                <li>Authy</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: var(--bg-color); padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+            <h4 style="margin-bottom: 1rem; color: var(--text-primary);">Step 2: Scan QR Code</h4>
+            <div class="qr-container">
+                <img src="data:image/png;base64,{{ qr_code }}" alt="QR Code" class="qr-code">
+            </div>
+        </div>
+        
+        <div class="secret-key">
+            <p><strong>Manual Entry Key:</strong></p>
+            <code>{{ secret }}</code>
+            <p class="form-text">Use this key if you can't scan the QR code</p>
+        </div>
+        
+        <div style="background-color: var(--bg-color); padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+            <h4 style="margin-bottom: 1rem; color: var(--text-primary);">Step 3: Verify Setup</h4>
+            <form method="POST" action="{{ url_for('enable_2fa') }}" class="auth-form" style="margin-bottom: 0;">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                
+                <div class="form-group">
+                    <label for="token">Verification Code</label>
+                    <input type="text" id="token" name="token" required 
+                           pattern="[0-9]{6}" maxlength="6" class="form-control" 
+                           placeholder="000000"
+                           style="text-align: center; font-size: 1.5rem; letter-spacing: 0.5rem;">
+                    <small class="form-text">Enter the 6-digit code from your authenticator app to confirm</small>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">Enable 2FA</button>
+            </form>
+        </div>
+        
+        <div class="auth-footer">
+            <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    // Auto-submit when 6 digits are entered
+    document.getElementById('token').addEventListener('input', function(e) {
+        // Remove non-numeric characters
+        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    });
+</script>
+{% endblock %}
+{% endblock %}

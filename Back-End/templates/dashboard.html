@@ -1,59 +1,66 @@
-<!-- templates/dashboard.html -->
 {% extends "base.html" %}
 
-{% block content %}
-<div class="d-flex justify-content-between mb-4">
-    <h1>Dashboard</h1>
-    <div>
-        <a href="{{ url_for('add_content', content_type='project') }}" class="btn btn-success">Add Project</a>
-        <a href="{{ url_for('add_content', content_type='blog') }}" class="btn btn-success">Add Blog Post</a>
-    </div>
-</div>
+{% block title %}Dashboard - Flask Auth App{% endblock %}
 
-<div class="row">
-    <div class="col-md-6">
-        <h3>Projects</h3>
-        <div class="list-group">
-            {% for project in projects %}
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                    <h5>{{ project.title }}</h5>
-                    <p class="mb-0">{{ project.description }}</p>
-                </div>
-                <div>
-                    <a href="{{ url_for('edit_content', content_type='project', entry_id=project.id) }}" 
-                       class="btn btn-sm btn-primary" style="width: 100%;">Edit</a>
-                    <form method="POST" 
-                          action="{{ url_for('delete_content', content_type='project', entry_id=project.id) }}" 
-                          class="d-inline">
-                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                    </form>
-                </div>
+{% block content %}
+<div class="dashboard">
+    <h1>Dashboard</h1>
+    <p class="welcome-text">{{ get_text('welcome_back') }}, <strong>{{ user.username }}</strong>!</p>
+    
+    <div class="dashboard-grid">
+        <div class="dashboard-card">
+            <h3>Account Information</h3>
+            <div class="info-row">
+                <span class="info-label">Username:</span>
+                <span class="info-value">{{ user.username }}</span>
             </div>
-            {% endfor %}
+            <div class="info-row">
+                <span class="info-label">Email:</span>
+                <span class="info-value">{{ user.email }}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Member Since:</span>
+                <span class="info-value">{{ user.created_at.strftime('%B %d, %Y') }}</span>
+            </div>
+        </div>
+        
+        <div class="dashboard-card">
+            <h3>Security Settings</h3>
+            <div class="info-row">
+                <span class="info-label">Two-Factor Authentication:</span>
+                <span class="info-value">
+                    {% if user.two_fa_enabled %}
+                        <span class="badge badge-success">✓ Enabled</span>
+                    {% else %}
+                        <span class="badge badge-warning">✗ Disabled</span>
+                    {% endif %}
+                </span>
+            </div>
+            
+            <div class="button-group">
+                {% if user.two_fa_enabled %}
+                    <form method="POST" action="{{ url_for('disable_2fa') }}" style="display: inline;">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="btn btn-danger" 
+                                onclick="return confirm('Are you sure you want to disable 2FA? This will make your account less secure.')">
+                            Disable 2FA
+                        </button>
+                    </form>
+                {% else %}
+                    <a href="{{ url_for('enable_2fa') }}" class="btn btn-success">Enable 2FA</a>
+                    <small class="form-text" style="margin-top: 0.5rem; display: block;">
+                        Add an extra layer of security to your account
+                    </small>
+                {% endif %}
+            </div>
         </div>
     </div>
-
-    <div class="col-md-6">
-        <h3>Blog Posts</h3>
-        <div class="list-group">
-            {% for post in blog_posts %}
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                    <h5>{{ post.title }}</h5>
-                    <p class="mb-0">{{ post.excerpt }}</p>
-                </div>
-                <div>
-                    <a href="{{ url_for('edit_content', content_type='blog', entry_id=post.id) }}" 
-                       class="btn btn-sm btn-primary" style="width: 100%;">Edit</a>
-                    <form method="POST" 
-                          action="{{ url_for('delete_content', content_type='blog', entry_id=post.id) }}" 
-                          class="d-inline">
-                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                    </form>
-                </div>
-            </div>
-            {% endfor %}
+    
+    <div class="dashboard-card" style="margin-top: 2rem;">
+        <h3>Quick Actions</h3>
+        <div class="button-group">
+            <a href="{{ url_for('forgot_password') }}" class="btn btn-secondary">Change Password</a>
+            <a href="{{ url_for('logout') }}" class="btn btn-secondary">Logout</a>
         </div>
     </div>
 </div>

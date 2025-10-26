@@ -1,0 +1,1020 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* LIGHT MODE Variables */
+    --primary-color: #4f46e5;
+    --primary-dark: #4338ca;
+    --secondary-color: #6b7280;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --bg-color: #f9fafb; /* Light Background */
+    --card-bg: #ffffff;  /* Light Card/Surface */
+    --text-primary: #111827; /* Dark Text */
+    --text-secondary: #6b7280; /* Muted Text */
+    --border-color: #e5e7eb;
+    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --hover-bg: #f3f4f6;
+}
+
+
+
+.dark-mode {
+    /* DARK MODE Variables (Applied to <html> when class is present) */
+    --primary-color: #818cf8; /* Lighter primary for contrast */
+    --primary-dark: #6366f1;
+    --success-color: #34d399;
+    --danger-color: #f87171;
+    --bg-color: #111827; /* Dark Background */
+    --card-bg: #1f2937;  /* Dark Card/Surface */
+    --text-primary: #f3f4f6; /* Light Text */
+    --text-secondary: #9ca3af; /* Muted Light Text */
+    --border-color: #374151;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+    --hover-bg: #374151;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+/* Base Utility Classes (ensure they respect the color variables) */
+.d-flex { display: flex; }
+.justify-content-between { justify-content: space-between; }
+.align-items-center { align-items: center; }
+.mb-4 { margin-bottom: 1.5rem; }
+.row { display: flex; flex-wrap: wrap; margin-top: 1.5rem; gap: 2rem; }
+.col-md-6 { flex: 1; min-width: 300px; max-width: 100%; }
+.col-md-8{width: 100%;}
+.d-inline { display: inline; }
+
+
+/* --- Navigation --- */
+.navbar {
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+    box-shadow: var(--shadow);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+/* --- Dark Mode Toggle Button --- */
+.dark-mode-toggle {
+    background: var(--border-color);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 1rem;
+    transition: background-color 0.3s, color 0.3s;
+    outline: none;
+}
+
+.dark-mode-toggle:hover {
+    background-color: var(--hover-bg);
+}
+
+
+/* --- Container --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* --- Main Content --- */
+.main-content {
+    flex: 1;
+    padding: 2rem 0;
+}
+
+
+/* --- Buttons --- */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.2s, transform 0.1s;
+    line-height: 1.2;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--card-bg); /* Use card-bg for white/light text */
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--card-bg);
+}
+
+.btn-secondary:hover {
+    background-color: #4b5563;
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: var(--card-bg);
+}
+
+.btn-success:hover {
+    background-color: #059669; /* Slightly darker than success variable dark */
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: var(--card-bg);
+}
+
+.btn-danger:hover {
+    background-color: #dc2626;
+}
+
+.btn-sm {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* --- Dashboard Specific Styles --- */
+.list-group {
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.list-group-item {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.list-group-item:hover {
+    background-color: var(--hover-bg); /* Using the new hover variable */
+}
+
+.list-group-item h5 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.list-group-item p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    line-height: 1.4;
+}
+
+.list-group-item > div:last-child {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* --- Forms (Add/Edit) --- */
+.auth-card {
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    color: var(--text-primary);
+    background-color: var(--bg-color); /* Lighter background for form inputs */
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.3s;
+}
+
+.dark-mode .form-control {
+    background-color: #374151; /* Slightly darker input on dark mode */
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+textarea.form-control {
+    resize: vertical;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .row {
+        gap: 1.5rem;
+    }
+
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .d-flex.justify-content-between div:last-child {
+        margin-top: 1rem;
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .d-flex.justify-content-between .btn {
+        margin-left: 0;
+    }
+
+    .list-group-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .list-group-item > div:last-child {
+        margin-top: 0.75rem;
+        width: 100%;
+        justify-content: stretch;
+        gap: 0.75rem;
+    }
+
+    .list-group-item form {
+        flex: 1; /* allow delete form to take space */
+    }
+}
+
+/**/
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navigation */
+.navbar {
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+    box-shadow: var(--shadow);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.btn-logout {
+    color: var(--danger-color) !important;
+}
+
+.btn-register {
+    background-color: var(--primary-color);
+    color: white !important;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    transition: background-color 0.2s;
+}
+
+.btn-register:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 2rem 0;
+}
+
+/* Flash Messages */
+.flash-messages {
+    margin-bottom: 1.5rem;
+}
+
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow);
+}
+
+.alert-success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border-left: 4px solid var(--success-color);
+}
+
+.alert-error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border-left: 4px solid var(--danger-color);
+}
+
+.alert-warning {
+    background-color: #fef3c7;
+    color: #92400e;
+    border-left: 4px solid var(--warning-color);
+}
+
+.alert-info {
+    background-color: #dbeafe;
+    color: #1e40af;
+    border-left: 4px solid var(--info-color);
+}
+
+.close-alert {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.close-alert:hover {
+    opacity: 1;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* Features Section */
+.features {
+    padding: 3rem 0;
+}
+
+.features h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.feature-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.feature-card p {
+    color: var(--text-secondary);
+}
+
+/* Authentication Container */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    padding: 2rem 0;
+}
+
+.auth-card {
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 550px;
+}
+
+.auth-card h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.auth-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+/* Forms - Consolidated and Professional Look */
+.auth-form {
+    margin-bottom: 1.5rem;
+}
+
+.mb-3 {
+    margin-bottom: 1.5rem; /* Standardizing mb-3 */
+}
+
+.form-group label,
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600; /* Slightly bolder labels */
+    color: var(--text-primary);
+    font-size: 0.9rem; /* Slightly smaller for form labels */
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    color: var(--text-primary);
+    background-color: var(--card-bg);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); /* Softer focus shadow */
+}
+
+.form-control::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+/* Textareas */
+textarea.form-control {
+    resize: vertical;
+}
+
+.form-text {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+}
+
+.form-check-input {
+    margin-right: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+}
+
+.form-check-label {
+    cursor: pointer;
+    font-weight: normal;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    font-weight: 600; /* Bolder button text */
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+    line-height: 1.2; /* Better vertical alignment */
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    box-shadow: var(--shadow);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #4b5563;
+    box-shadow: var(--shadow);
+}
+
+.btn-success {
+    background-color: var(--success-color); /* Using CSS Variable for consistency */
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #059669; /* Slightly darker than variable dark */
+    box-shadow: var(--shadow);
+}
+
+.btn-danger {
+    background-color: var(--danger-color); /* Using CSS Variable for consistency */
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #dc2626; /* Slightly darker than variable dark */
+    box-shadow: var(--shadow);
+}
+
+.btn-block {
+    width: 100%;
+    display: block;
+}
+
+.button-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.btn-sm {
+    padding: 0.5rem 0.8rem; /* Smaller padding for small buttons */
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Auth Links */
+.auth-links {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.auth-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+.auth-footer {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.auth-footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Dashboard */
+.dashboard {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.dashboard h1 {
+    margin-bottom: 0.5rem;
+}
+
+.welcome-text {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.dashboard-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow);
+}
+
+.dashboard-card h3 {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.info-value {
+    color: var(--text-primary);
+}
+
+/* Badges */
+.badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.badge-success {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.badge-warning {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+/* QR Code */
+.qr-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.qr-code {
+    max-width: 250px;
+    width: 100%;
+    height: auto;
+    border: 2px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: white;
+}
+
+.secret-key {
+    background-color: var(--bg-color);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.secret-key code {
+    display: block;
+    margin: 0.5rem 0;
+    padding: 0.75rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    color: var(--primary-color);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    padding: 2rem 0;
+    margin-top: auto;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .nav-links {
+        gap: 1rem;
+        font-size: 0.875rem;
+    }
+
+    .auth-card {
+        padding: 1.5rem;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* --- Dashboard Specific Styles --- */
+
+/* Top Action Buttons */
+.d-flex.justify-content-between {
+    align-items: center; /* Ensure vertical alignment */
+}
+
+.d-flex .btn {
+    margin-left: 0.5rem; /* Better gap between buttons */
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+/* Cards and lists */
+.list-group {
+    background-color: var(--card-bg);
+    border-radius: 0.5rem; /* Consistent border radius */
+    box-shadow: var(--shadow); /* Using variable shadow */
+    overflow: hidden;
+    border: 1px solid var(--border-color); /* Added a subtle border */
+    margin-top: 15px;
+}
+
+.list-group-item {
+    padding: 1rem 1.25rem; /* Adjusted padding */
+    border-bottom: 1px solid var(--border-color); /* Using variable border color */
+    background-color: var(--card-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.list-group-item:hover {
+    background-color: var(--bg-color); /* Lighter hover background */
+    transform: none; /* Removed translateY for a cleaner, flatter look */
+    box-shadow: none;
+}
+
+/* Titles inside items */
+.list-group-item h5 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.list-group-item p {
+    color: var(--text-secondary);
+    font-size: 0.875rem; /* Consistent with other secondary text */
+    margin-top: 0.25rem;
+    line-height: 1.4;
+}
+
+/* Edit/Delete Buttons Group */
+.list-group-item > div:last-child {
+    display: flex;
+    gap: 0.5rem; /* Space between edit and delete buttons */
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.list-group-item .btn-sm {
+    /* Kept the styles from the .btn-sm general rule */
+    width: auto; /* Allow buttons to size based on content */
+    margin-bottom: 0;
+}
+
+/* Columns (Projects / Blog) */
+.row {
+    /*display: flex;*/
+    flex-wrap: wrap;
+    margin-top: 1.5rem; /* Adjusted margin */
+    gap: 2rem; /* Consistent gap */
+}
+
+.col-md-6 {
+    flex: 1;
+    min-width: 300px;
+    max-width: 100%;
+}
+
+/* Utility Class for Form in Dashboard View */
+.justify-content-center {
+    justify-content: center;
+}
+
+/* Add responsive tweaks */
+@media (max-width: 768px) {
+    .row {
+        gap: 1.5rem;
+    }
+    
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .d-flex.justify-content-between div:last-child { /* Targets the button group */
+        margin-top: 1rem;
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .d-flex.justify-content-between .btn {
+        margin-left: 0;
+    }
+
+    .list-group-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .list-group-item > div:last-child {
+        margin-top: 0.75rem;
+        width: 100%;
+        justify-content: stretch; /* Stretch buttons in mobile view */
+        gap: 0.75rem;
+    }
+}

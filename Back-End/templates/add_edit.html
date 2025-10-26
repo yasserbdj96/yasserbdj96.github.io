@@ -1,10 +1,13 @@
-<!-- templates/add_edit.html -->
 {% extends "base.html" %}
 
+{% block title %}{{ 'Edit' if entry else 'Add' }} {{ content_type.capitalize() }}{% endblock %}
+
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-8">
+<div style="max-width: 800px; margin: 0 auto;">
+    <div class="auth-card">
         <h2>{{ 'Edit' if entry else 'Add' }} {{ content_type.capitalize() }}</h2>
+        <p class="auth-subtitle" style="margin-bottom: 2rem;">Fill in the details below</p>
+        
         <form method="POST">
             {% if content_type == 'project' %}
                 <div class="mb-3">
@@ -14,22 +17,20 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Description</label>
-                    <textarea class="form-control" name="description" rows="3" required>
-                        {{- entry.description if entry -}}
-                    </textarea>
+                    <textarea class="form-control" name="description" rows="3" required>{{ entry.description if entry }}</textarea>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Technologies (comma-separated)</label>
                     <input type="text" class="form-control" name="tech" 
-                           value="{{ ', '.join(entry.tech) if entry }}" required>
+                           value="{% if entry %}{% if entry.tech is string %}{{ entry.tech }}{% else %}{{ ', '.join(entry.tech) }}{% endif %}{% endif %}" required>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Image Path</label>
+                    <label class="form-label">Image URL</label>
                     <input type="text" class="form-control" name="image" 
                            value="{{ entry.image if entry }}" required>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Cover Path</label>
+                    <label class="form-label">Cover URL</label>
                     <input type="text" class="form-control" name="cover" 
                            value="{{ entry.cover if entry }}" required>
                 </div>
@@ -40,9 +41,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Details</label>
-                    <textarea class="form-control" name="details" rows="5" required>
-                        {{- entry.details if entry -}}
-                    </textarea>
+                    <textarea class="form-control" name="details" rows="5" required>{{ entry.details if entry }}</textarea>
                 </div>
 
             {% else %}
@@ -53,14 +52,12 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Excerpt</label>
-                    <textarea class="form-control" name="excerpt" rows="3" required>
-                        {{- entry.excerpt if entry -}}
-                    </textarea>
+                    <textarea class="form-control" name="excerpt" rows="3" required>{{ entry.excerpt if entry }}</textarea>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Date</label>
                     <input type="text" class="form-control" name="date" 
-                           value="{{ entry.date if entry }}" required>
+                           value="{{ entry.date if entry }}" required placeholder="e.g., Jan 1, 2025">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Category</label>
@@ -68,30 +65,30 @@
                            value="{{ entry.category if entry }}" required>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Image Path</label>
+                    <label class="form-label">Image URL</label>
                     <input type="text" class="form-control" name="image" 
                            value="{{ entry.image if entry }}" required>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Cover Path</label>
+                    <label class="form-label">Cover URL</label>
                     <input type="text" class="form-control" name="cover" 
                            value="{{ entry.cover if entry }}" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Read Time</label>
                     <input type="text" class="form-control" name="readTime" 
-                           value="{{ entry.readTime if entry }}" required>
+                           value="{{ entry.read_time if entry }}" required placeholder="e.g., 5 min read">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Content</label>
-                    <textarea class="form-control" name="content" rows="10" required>
-                        {{- entry.content if entry -}}
-                    </textarea>
+                    <textarea class="form-control" name="content" rows="10" required>{{ entry.content if entry }}</textarea>
                 </div>
             {% endif %}
 
-            <button type="submit" class="btn btn-primary">Save</button>
-            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Cancel</a>
+            <div style="display: flex; gap: 0.75rem; margin-top: 2rem;">
+                <button type="submit" class="btn btn-primary" style="flex: 1;">Save {{ content_type.capitalize() }}</button>
+                <a href="{{ url_for('publish') }}" class="btn btn-secondary">Cancel</a>
+            </div>
         </form>
     </div>
 </div>
