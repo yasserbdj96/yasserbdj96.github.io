@@ -3,142 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yasserbdj96 Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Yasserbdj96 - Full-Stack Developer & Security Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="./static/img/logo.png">
     <link rel="stylesheet" href="./static/style.css">
-    <link rel="icon" type="image/png" href="static/img/yasserbdj96_025_transparent_337.png">
 </head>
 <body>
-    <div id="nav-placeholder"></div>
-<header>
-        <div class="container header-content" style="margin-top: 100px;">
-            <div class="profile-container">
-                <div class="profile-border">
-                    <img src="https://avatars.githubusercontent.com/u/24677945?v=4" alt="Profile" class="profile-image">
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <a href="#home" class="logo">
+                <img src="./static/img/logo.png" alt="Yasserbdj96">
+            </a>
+            <button class="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#blog">Blog</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#contact">Contact</a>
                 </div>
-                <div class="status-bubble"></div>
-                <div class="status-popup">Online - Available for collaborations</div>
-            </div>
-            <div class="header-text">
-                <h2>Yasserbdj96 Portfolio</h2>
-                <p>Sharing insights, updates, and ideas from my development journey</p>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- Add filter section -->
-    <section id="projects" class="container">
-        <h2>My Projects</h2>
-        <section id="filters" class="container">
-            <div id="tech-filters" class="tech-filters"></div>
-        </section>
-        <div class="projects-grid"></div>
-    </section>
-
-    <section id="pricing" class="container">
-    <h2>Project Pricing</h2>
-    <div id="pricing-container" class="pricing-grid"></div>
-    </section>
-
-    <script src="./static/app.js"></script>
-    <script>
-        // Fetch and initialize projects
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchProjects();
-        });
-
-        async function fetchProjects() {
-            const data = await loadDataOnce();
-            const projects = data.projects;
-            initFilters(projects);
-            renderProjects(projects);
-        }
-        function initFilters(projects) {
-            const techFilters = document.getElementById('tech-filters');
-            const allTech = [...new Set(projects.flatMap(project => project.tech))].sort();
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="profile-wrapper">
+                <div class="profile-border">
+                    <img src="https://avatars.githubusercontent.com/u/24677945?v=4" alt="Yasserbdj96" class="profile-img">
+                </div>
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    Available for Work
+                </div>
+            </div>
+            <h1 class="gradient-text">Yasserbdj96</h1>
+            <p class="hero-subtitle">Full-Stack Developer | Security Engineer | Open Source Advocate</p>
+            <p class="hero-description">Crafting secure, innovative solutions with 15+ years of experience in web development, cybersecurity, and automation</p>
             
-            techFilters.innerHTML = allTech.map(tech => `
-                <label class="filter-label">
-                    <input type="checkbox" value="${tech}" class="tech-filter">
-                    ${tech}
-                </label>
-            `).join('');
+            <div class="hero-stats" id="github-stats">
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Repositories</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1K+</div>
+                    <div class="stat-label">Contributions</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Stars</div>
+                </div>
+            </div>
 
-            document.querySelectorAll('.tech-filter').forEach(checkbox => {
-                checkbox.addEventListener('change', () => {
-                    // Toggle active class on parent label
-                    checkbox.parentElement.classList.toggle('active', checkbox.checked);
-                    filterProjects(projects);
-                });
-            });
-        }
+            <div class="hero-cta">
+                <a href="#projects" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i> View Projects
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <i class="fas fa-envelope"></i> Get in Touch
+                </a>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/yasserbdj96" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://twitter.com/yasserbdj96" target="_blank" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.youtube.com/@yasserbdj96" target="_blank" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://www.instagram.com/yasserbdj96" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/yasserbdj96" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
+    </section>
 
-        function renderProjects(projects) {
-            const grid = document.querySelector('.projects-grid');
-            const maxDescriptionLength = 200;
-
-            grid.innerHTML = projects.map((project, index) => {
-                const truncatedDescription = project.description.length > maxDescriptionLength
-                    ? project.description.slice(0, maxDescriptionLength) + '...'
-                    : project.description;
-
-                return `
-                    <a href="project.html?id=${index}" class="project-card" data-tech="${project.tech.join(',')}">
-                        <img src="${project.image}" class="project-image" alt="${project.title}">
-                        <h3>${project.title}</h3>
-                        <p>${truncatedDescription}</p>
-                        <div class="tech-list">
-                            ${project.tech.map(tech => `<span class="tech-item">${tech}</span>`).join('')}
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>👋 Hi! I'm Yasser, a passionate software engineer and security researcher from Algeria with a Bachelor's degree in Electromechanical Engineering. Since 2010, I've been crafting innovative solutions and contributing to the open-source community.</p>
+                    
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4><i class="fas fa-code"></i> Development</h4>
+                            <ul>
+                                <li>Python, PHP, JavaScript</li>
+                                <li>Flask, Django, Go</li>
+                                <li>React, Node.js</li>
+                                <li>HTML5, CSS3</li>
+                            </ul>
                         </div>
-                    </a>
-                `;
-            }).join('');
-        }
+                        <div class="skill-category">
+                            <h4><i class="fas fa-shield-alt"></i> Security</h4>
+                            <ul>
+                                <li>Penetration Testing</li>
+                                <li>Security Auditing</li>
+                                <li>Backdoor Development</li>
+                                <li>Encryption & Cryptography</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-cogs"></i> DevOps & Tools</h4>
+                            <ul>
+                                <li>Git & GitHub Actions</li>
+                                <li>Docker & CI/CD</li>
+                                <li>Linux Administration</li>
+                                <li>Automation Scripts</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-microchip"></i> Hardware</h4>
+                            <ul>
+                                <li>Arduino & ESP32</li>
+                                <li>IoT Development</li>
+                                <li>Microcontroller Programming</li>
+                                <li>Embedded Systems</li>
+                            </ul>
+                        </div>
+                    </div>
 
+                    <p>🌟 I'm dedicated to building high-quality, secure applications and actively contributing to open source. My projects range from cybersecurity tools to media managers and automation solutions.</p>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <a href="https://github.com/sponsors/yasserbdj96" class="btn btn-sponsor" target="_blank">
+                            <i class="fas fa-heart"></i> Sponsor My Work
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        function filterProjects(projects) {
-            const selected = Array.from(document.querySelectorAll('.tech-filter:checked'))
-                             .map(checkbox => checkbox.value);
-            
-            document.querySelectorAll('.project-card').forEach(card => {
-                const cardTech = card.dataset.tech.split(',');
-                const shouldShow = selected.length === 0 || 
-                                selected.every(tech => cardTech.includes(tech));
-                card.style.display = shouldShow ? 'block' : 'none';
-            });
-        }
+    <!-- Projects Section -->
+    <section id="projects" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-subtitle">Open source tools and applications built with passion</p>
+            <div class="tech-filters" id="tech-filters"></div>
+            <div class="projects-grid" id="projects-grid"></div>
+        </div>
+    </section>
 
-    </script>
-    <script>
-  fetch('pricing.json')
-    .then(response => response.json())
-    .then(plans => {
-      const container = document.getElementById('pricing-container');
-      plans.forEach(plan => {
-        const card = document.createElement('div');
-        card.className = 'pricing-card' + (plan.featured ? ' featured' : '');
+    <!-- Blog Section -->
+    <section id="blog" class="section">
+        <div class="container">
+            <h2 class="section-title">Latest Blog Posts</h2>
+            <p class="section-subtitle">Thoughts, tutorials, and insights on development and security</p>
+            <div class="blog-grid" id="blog-grid"></div>
+        </div>
+    </section>
 
-        card.innerHTML = `
-          <h3>${plan.title}</h3>
-          <div class="price">${plan.price}<span>${plan.unit}</span></div>
-            <ul class="price-features">
-            ${plan.features.map(feature => {
-                const isCheck = feature.startsWith("✓");
-                const isCross = feature.startsWith("×");
-                const className = isCheck ? "check" : isCross ? "cross" : "";
-                const cleanText = feature.replace(/^[✓×]\s*/, ""); // remove ✓ or × and optional space
-                return `<li class="${className}">${cleanText}</li>`;
-            }).join('')}
-            </ul>
+    <!-- Pricing Section -->
+    <section id="pricing" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">Project Pricing</h2>
+            <p class="section-subtitle">Professional development services tailored to your needs</p>
+            <div class="pricing-grid" id="pricing-grid"></div>
+        </div>
+    </section>
 
-          <a href="${plan.link}" class="btn">${plan.button}</a>
-        `;
-        container.appendChild(card);
-      });
-    })
-    .catch(error => console.error('Error loading pricing data:', error));
-</script>
-    <div id="footer-placeholder"></div>
-    <script src="./static/navigation-footer.js"></script>
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Let's collaborate on your next project</p>
+            <form id="contact-form" class="contact-form">
+                <div class="form-row">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                </div>
+                <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; <span id="current-year"></span> Yasserbdj96. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/yasserbdj96" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://twitter.com/yasserbdj96" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://www.youtube.com/@yasserbdj96" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal" class="modal thin-scroll">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
