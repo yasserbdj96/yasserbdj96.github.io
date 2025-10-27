@@ -880,7 +880,7 @@
         #modal-body img {
             max-width: 100%;
             border-radius: 10px;
-            margin: 1.5rem 0;
+            /*margin: 1.5rem 0;*/
         }
 
         #modal-body h1,
@@ -901,7 +901,7 @@
         #modal-body a {
             color: var(--primary);
             text-decoration: none;
-            border-bottom: 1px solid var(--primary);
+            /*border-bottom: 1px solid var(--primary);*/
             transition: var(--transition);
         }
 
