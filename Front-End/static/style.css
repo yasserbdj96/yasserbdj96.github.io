@@ -1089,3 +1089,7 @@ html {
   color: #0b1220;
   border: 1px solid rgba(11,18,32,0.06);
 }
+
+a{
+	text-decoration: none;
+}
