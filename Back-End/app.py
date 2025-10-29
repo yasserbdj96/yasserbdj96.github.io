@@ -16,6 +16,7 @@ import os
 from dotenv import load_dotenv
 import json
 import uuid
+from flask_cors import CORS
 
 # Add this after your imports in app.py
 def get_locale():
@@ -35,6 +36,8 @@ def get_text(key):
 load_dotenv()
 
 app = Flask(__name__)
+
+CORS(app, origins=['http://localhost:3000', 'http://127.0.0.1:3000'])
 
 # Configuration
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your-secret-key-change-this')
